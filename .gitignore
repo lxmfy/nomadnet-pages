@@ -169,3 +169,10 @@ cython_debug/
 
 # PyPI configuration file
 .pypirc
+
+# Nomad Network
+nomadnetwork/
+
+# Reticulum
+reticulum/
+

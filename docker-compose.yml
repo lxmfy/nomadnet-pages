@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  lxmfy-pages:
+    image: ghcr.io/markqvist/nomadnet:master
+    container_name: lxmfy-pages
+    restart: unless-stopped
+    volumes:
+      - ${PWD}/nomadnetwork:/root/.nomadnetwork
+      - ${PWD}/reticulum:/root/.reticulum
+    security_opt:
+      - seccomp:./seccomp.json
+    cap_add:
+      - CAP_WAKE_ALARM
+    deploy:
+      resources:
+        limits:
+          cpus: '0.50'
+          memory: 256M
+        reservations:
+          cpus: '0.25'
+          memory: 128M
+    environment:
+      - TZ=UTC
+      - PYTHONUNBUFFERED=1
