@@ -6,20 +6,21 @@ services:
     container_name: lxmfy-pages
     restart: unless-stopped
     volumes:
-      - ${PWD}/nomadnetwork:/root/.nomadnetwork
-      - ${PWD}/reticulum:/root/.reticulum
+      - ${PWD}/nomadnetwork:/root/.nomadnetwork:Z
+      - ${PWD}/reticulum:/root/.reticulum:Z
     security_opt:
       - seccomp:./seccomp.json
     cap_add:
       - CAP_WAKE_ALARM
+      - CAP_DAC_OVERRIDE
     deploy:
       resources:
         limits:
           cpus: '0.50'
-          memory: 256M
+          memory: 100M
         reservations:
           cpus: '0.25'
-          memory: 128M
+          memory: 100M
     environment:
       - TZ=UTC
       - PYTHONUNBUFFERED=1

@@ -5,7 +5,7 @@ import requests
 import json
 
 GITHUB_API = "https://api.github.com/repos/lxmfy/LXMFy/releases"
-DOWNLOAD_DIR = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "files")
+DOWNLOAD_DIR = os.path.join(".", "files")
 
 def get_releases():
     response = requests.get(GITHUB_API)
