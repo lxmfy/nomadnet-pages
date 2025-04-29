@@ -2,21 +2,23 @@ version: '3.8'
 
 services:
   lxmfy-pages:
-    image: ghcr.io/markqvist/nomadnet:master
+    image: ghcr.io/sudo-ivan/nomadnet:master
     container_name: lxmfy-pages
     restart: unless-stopped
     volumes:
-      - ${PWD}/nomadnetwork:/root/.nomadnetwork:Z
-      - ${PWD}/reticulum:/root/.reticulum:Z
+      - ./nomadnetwork:/home/nonroot/.nomadnetwork
+      - ./reticulum:/home/nonroot/.reticulum
     security_opt:
-      - seccomp:./seccomp.json
+      - no-new-privileges:true
+      - seccomp:unconfined
+    cap_drop:
+      - ALL
     cap_add:
-      - CAP_WAKE_ALARM
-      - CAP_DAC_OVERRIDE
+      - NET_BIND_SERVICE
     deploy:
       resources:
         limits:
-          cpus: '0.50'
+          cpus: '1.0'
           memory: 100M
         reservations:
           cpus: '0.25'
